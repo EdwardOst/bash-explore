@@ -1,6 +1,7 @@
 # sum name arrname [ arrname ... ]
 function sum {
-    typeset -n _result=$1 _arr
+    typeset -n _result=$1
+    typeset -n _arr
     typeset IFS=+
     _result=0
     for _arr in "${@:2}"; do                        # Demonstrate the special property of "for" on a nameref.
