@@ -25,5 +25,5 @@ a=([k1]="a1" [k2]="a2" [k3]="a3")
 b=([l1]="b1" [l2]="b2" [l3]="b3")
 c=([m1]="c1" [m2]="c2" [m3]="c3")
 myprint summary a b c
-echo "indexes: ${!summary[@]}"
+echo "keys: ${!summary[@]}"
 echo "values: ${summary[@]}"
