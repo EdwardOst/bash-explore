@@ -6,9 +6,10 @@ declare -A my_dictionary=( [key1]=value1 [key2]=value2 )
 define(){ IFS='\n' read -r -d '' ${1} || true; }
 
 # use a Here document to create a template
-# single quote escapes allow commands or functions to inject derived content
+# backtick allows commands or functions to inject derived content
 define my_template <<EOF
 function ${my_func}() {
+    echo "executing ${my_func}"
     `typeset -p my_dictionary`
 }
 EOF
@@ -16,18 +17,32 @@ EOF
 echo "${my_template}"
 
 # source the here document variable to instantiate the function
-source <(echo "${my_template}")
+# this is best since echo is a builtin rather than cat below
+#source <(echo "${my_template}")
+
+source /dev/stdin <<<"${my_template}"
 
 foo
 
-# alternative syntax sources here document in a single step
+# alternative syntax sources here document in a single step with echo
 source  <(
-	cat <<-EOF
+	define my_template <<-EOF
 	    function my_test2() { 
 	        echo "hello mars"
 	    }
 	EOF
+	echo "${my_template}"
 	)
 my_test2
 
+
+# alternative syntax sources here document in a single step with cat
+source  <(
+	cat <<-EOF
+	    function my_test2() { 
+	        echo "hello venus"
+	    }
+	EOF
+	)
+my_test2
 

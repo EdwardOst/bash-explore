@@ -11,6 +11,7 @@ function copy_array {
     declare -n _target=$2
     typeset IFS=|
     for key in "${!_source[@]}" ; do
+#        _target+=([${key}]="${_source[${key}]}")
         _target+=([${key}]="${_source[${key}]}")
     done
 }
