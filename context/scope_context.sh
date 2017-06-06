@@ -23,16 +23,6 @@ EOF
 echo "${scope_context}"
 
 function myfunc() {
-    source <(echo "${scope_context}")
-    echo "inside: var1: ${var1}"
-    echo "inside: var2: ${var2}"
-}
-
-myfunc
-echo "outside: var1: ${var1}"
-echo "outside: var2: ${var2}"
-
-function myfunc() {
     local -n myscope="${1}"
     source <(echo "${myscope}")
     echo "inside: var1: ${var1}"

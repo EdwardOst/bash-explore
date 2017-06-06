@@ -3,7 +3,7 @@ my_func=foo
 declare -A my_dictionary=( [key1]=value1 [key2]=value2 )
 
 # pretty print define function for reading here documents into a variable
-define(){ IFS='\n' read -r -d '' ${1} || true; }
+define(){ IFS='\n' read -r -d '' "${1}" || true; }
 
 # use a Here document to create a template
 # backtick allows commands or functions to inject derived content
@@ -17,10 +17,11 @@ EOF
 echo "${my_template}"
 
 # source the here document variable to instantiate the function
-# this is best since echo is a builtin rather than cat below
+# this is better than cat because echo is a builtin
 #source <(echo "${my_template}")
 
-source /dev/stdin <<<"${my_template}"
+# better yet is using path of stdin to avoid subshell
+source /dev/stdin <<< "${my_template}"
 
 foo
 

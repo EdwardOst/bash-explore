@@ -30,6 +30,16 @@ function array_associative_local_to_dictionary() {
     echo "values: ${my_context[@]}"
 }
 
+
+function save_state() {
+
+    local -n state_array
+    local function_name
+
+    set -a ${function_name}"
+
+}
+
 declare -A some_map
 array_associative_local_to_dictionary some_map
     echo "keys:   ${!some_map[@]}"
